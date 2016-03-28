@@ -176,12 +176,19 @@ void film::CompareFrame(AVFrame *pFrame, AVFrame *pFramePrev) {
    */
   if ((diff > this->threshold) && (score > this->threshold)) {
     shot s;
+    s.score = score;
     s.fbegin = frame_number;
     s.msbegin = int((frame_number * 1000) / fps);
     s.myid = shots.back().myid + 1;
 
+    /*
+     * Print frame times and scores to scren 
+     */
+
+    cout << ",time:" << s.msbegin << ",score:" << s.score;
+
 #ifdef DEBUG
-    cerr << "Shot log :: " << s.msbegin << endl;
+    //cerr << "Shot log :: " << s.msbegin << endl;
 #endif
 
     /*
